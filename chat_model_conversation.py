@@ -30,3 +30,5 @@ messages.extend([
 actor_response = llm.invoke(messages)
 print(f"Actors: {actor_response.content}")
 
+# Get token count
+print(suggestion_response.response_metadata['token_usage']['total_tokens'], actor_response.response_metadata['token_usage']['total_tokens'])
