@@ -11,6 +11,7 @@ messages_template_list = [
     ('human', 'How to create a {object} in {subject}')
 ]
 
+# create template object from template_messages_list
 template = ChatPromptTemplate.from_messages(messages_template_list)
 prompt = template.invoke({
     'subject': 'c#',
