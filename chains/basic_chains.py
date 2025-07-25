@@ -12,9 +12,13 @@ template = [
     ("human", "tell me {fact_count} facts")
 ]
 
+# create prompt template
 prompt_template = ChatPromptTemplate.from_messages(template)
+
+# build chain
 chain = prompt_template | llm 
 
+# invoke the chain
 response = chain.invoke(
     {
         'animal': 'elephant',
