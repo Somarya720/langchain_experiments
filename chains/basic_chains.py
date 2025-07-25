@@ -1,7 +1,9 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
+from langchain_core.output_parsers import StrOutputParser
 
+# load env 
 load_dotenv()
 
 # create model
@@ -16,7 +18,7 @@ template = [
 prompt_template = ChatPromptTemplate.from_messages(template)
 
 # build chain
-chain = prompt_template | llm 
+chain = prompt_template | llm | StrOutputParser()
 
 # invoke the chain
 response = chain.invoke(
