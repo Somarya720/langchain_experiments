@@ -12,17 +12,14 @@ template = [
     ("human", "tell me {fact_count} facts")
 ]
 
-# generating prompt from template 
 prompt_template = ChatPromptTemplate.from_messages(template)
-prompt = prompt_template.invoke({
-    'animal': 'Elephant',
-    'fact_count': 2
-})
+chain = prompt_template | llm 
 
-# generate ai response
-llm_response = llm.invoke(prompt)
-
-# get required output
-response = llm_response.content
+response = chain.invoke(
+    {
+        'animal': 'elephant',
+        'fact_count': 2
+    }
+)
 
 print(response)
