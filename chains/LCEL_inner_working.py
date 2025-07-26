@@ -6,8 +6,18 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
 
+# Helper function to avoid late binding
+def get_runnable_lambda(task):
+    '''
+    Returns runnable lambda for the task
+    '''
+    return RunnableLambda(lambda x: task.invoke(x))
+
 def get_chain(*tasks) -> RunnableSequence:
-    results = [RunnableLambda(lambda x: task.invoke(x)) for task in tasks]
+    '''
+    Returns a RunnableSequence object based on the tasks in argument
+    '''
+    results = [get_runnable_lambda(task) for task in tasks]
     return RunnableSequence(first=results[0], middle=results[1:-1], last=results[-1])
 
 load_dotenv()
