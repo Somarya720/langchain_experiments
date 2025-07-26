@@ -6,6 +6,10 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
 
+def get_chain(*tasks) -> RunnableSequence:
+    results = [RunnableLambda(lambda x: task.invoke(x)) for task in tasks]
+    return RunnableSequence(first=results[0], middle=results[1:-1], last=results[-1])
+
 load_dotenv()
 
 # create the template
@@ -20,7 +24,8 @@ prompt_template = ChatPromptTemplate.from_messages(template)
 parser = StrOutputParser()
 
 # create the chain
-chain = prompt_template | model | parser
+# chain = prompt_template | model | parser
+chain = get_chain(prompt_template, model, parser)
 
 response = chain.invoke({
     'sport': 'football',
