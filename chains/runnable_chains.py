@@ -15,9 +15,9 @@ template = [
 prompt_template = ChatPromptTemplate.from_messages(template)
 
 # runnable lambda to format the template
-format_template = RunnableLambda(lambda x: prompt_template.format_prompt(**x))
+format_template = RunnableLambda(lambda x: prompt_template.invoke(x))
 # runnable lambda to invoke the llm
-invoke_model = RunnableLambda(lambda x: model.invoke(x.to_messages()))
+invoke_model = RunnableLambda(lambda x: model.invoke(x))
 # runnable lambda to extract only the content from ai response
 extract_content = RunnableLambda(lambda x: x.content)
 
