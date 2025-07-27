@@ -34,10 +34,10 @@ translation_data = {
 }
 
 # create runnable lambda
-prompt_translate = RunnableLambda(lambda output: prompt_translate_template.format_prompt(text=output, **translation_data))
+prompt_translate_params = RunnableLambda(lambda output: {**translation_data, 'text': output})
 
 # create the chain
-chain = prompt_fact_template | model | StrOutputParser() | prompt_translate | model | StrOutputParser()
+chain = prompt_fact_template | model | StrOutputParser() | prompt_translate_params | prompt_translate_template | model | StrOutputParser()
 
 # invoke the chain
 response = chain.invoke(fact_data)
