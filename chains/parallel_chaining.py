@@ -48,5 +48,7 @@ chain = (
     )
 )
 
+# invoke the chain
 resposne = chain.invoke(summary_parameters)
+
 print(resposne)
