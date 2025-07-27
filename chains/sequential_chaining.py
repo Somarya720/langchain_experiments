@@ -43,18 +43,3 @@ chain = prompt_fact_template | model | StrOutputParser() | prompt_translate_para
 response = chain.invoke(fact_data)
 
 print(response)
-
-# translation_data = {
-#     'text': fact_response.content,
-#     'language': 'Portugal'
-# }
-
-# fact_prompt_template = ChatPromptTemplate.from_messages(fact_template)
-# fact_prompt = fact_prompt_template.invoke(fact_data)
-# fact_response = model.invoke(fact_prompt)
-
-# translate_prompt_template = ChatPromptTemplate.from_messages(translate_template)
-# translate_prompt = translate_prompt_template.invoke(translation_data)
-# translation_response = model.invoke(translate_prompt)
-
-# print(fact_response.content, translation_response.content, sep='\n\n')
