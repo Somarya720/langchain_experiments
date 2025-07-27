@@ -1,5 +1,5 @@
 from langchain_openai import ChatOpenAI
-from langchain_core.runnables import RunnableLambda, RunnableParallel
+from langchain_core.runnables import RunnableLambda, RunnableParallel, RunnableSequence
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
@@ -29,7 +29,7 @@ prompt_plot_template = ChatPromptTemplate.from_messages(plot_template)
 prompt_character_template = ChatPromptTemplate.from_messages(character_template)
 
 # create chains to be processed parallely
-def chain_plot(template: ChatPromptTemplate):
+def chain_plot(template: ChatPromptTemplate) -> RunnableSequence:
     return RunnableLambda(lambda summary: {'summary': summary}) | template | model | StrOutputParser()
 
 # create chain to handle parralel chains
