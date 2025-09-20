@@ -3,6 +3,8 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_chroma import Chroma
 from dotenv import load_dotenv
 
+load_dotenv()
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
 vector_db_dir = os.path.join(current_dir,'db','chroma')
 
