@@ -31,16 +31,16 @@ for doc in doc_list:
 
     loader = TextLoader(os.path.join(doc_path, doc), encoding='utf-8')
     document = loader.load()
+
+    # Add source as the metadata
     document[0].metadata = {
-        'Source': doc
+        'Source': doc 
     }
     documents.append(document[0])
     
+# Split text
 splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
 document_chunks = splitter.split_documents(documents)
-x = ''
-for doc in document_chunks:
-    if x == doc.metadata['Source']:
-        continue
-    print(doc.metadata)
-    x = doc.metadata['Source']
+
+# create store
+db = Chroma.from_documents(embedding=embedding, documents=document_chunks, persist_directory=persistant_dir)
