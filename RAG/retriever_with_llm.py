@@ -21,7 +21,7 @@ retriever = db.as_retriever(
     search_kwargs={"k": 3, "score_threshold": 0.2}
 )
 
-query = "Is Harsh Neel a developer?"
+query = "Where was Dracula's castle located?"
 
 document_list = retriever.invoke(query)
 
@@ -29,4 +29,8 @@ relevant_chunks = ''
 for doc in document_list:
     relevant_chunks += f"Source: {doc.metadata['Source']}\nContent: {doc.page_content}"
 
-print(relevant_chunks)
+prompt = relevant_chunks + '\n\n' + query + "Please provide the answer based on the document provided earlier. Also mention the source. If the information is not in the documents then return this information does not exist in the document and dont answer general knowledge questions."
+
+result = llm.invoke(prompt)
+
+print(result.content)
