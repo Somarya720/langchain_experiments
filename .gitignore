@@ -3,3 +3,5 @@ venv/
 test.py
 RAG/documents
 RAG/db
+
+huggingface_cache
