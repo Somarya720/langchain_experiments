@@ -16,8 +16,5 @@ vector_list = embeddings.embed_documents(doc_list)
 print(vector_list)
 
 for vector in vector_list:
-    v = []
-    for element in vector:
-        v.append(round(element,2))
-
+    v = [round(element,2) for element in vector]
     print(v)
