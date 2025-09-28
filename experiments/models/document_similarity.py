@@ -18,18 +18,23 @@ query = 'tell me about bumrah'
 
 embeddings = OpenAIEmbeddings(model = 'text-embedding-3-small', dimensions=512)
 
+# create embeddings
 doc_vectors = embeddings.embed_documents(documents)
 query_vector = embeddings.embed_query(query)
 
+# specify threshold
 threshold = 0.3
 
+# calculate similarity score
 similarity_matrix = cosine_similarity([query_vector], doc_vectors)
 doc_score = list(zip(documents, similarity_matrix[0]))
 
+# filter documents over threshold
 filtered_doc_score = [doc_sc for doc_sc in doc_score if doc_sc[1] > threshold]
 print(filtered_doc_score)
 
 if filtered_doc_score:
+    # get max score
     max_element = max(filtered_doc_score, key=lambda x: x[1])
     print(max_element[0])
 else:
