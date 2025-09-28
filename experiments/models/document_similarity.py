@@ -9,19 +9,28 @@ documents = [
     "MS Dhoni is a former Indian captain famous for his calm demeanor and finishing skills.",
     "Sachin Tendulkar, also known as the 'God of Cricket', holds many batting records.",
     "Rohit Sharma is known for his elegant batting and record-breaking double centuries.",
-    "Jasprit Bumrah is an Indian fast bowler known for his unorthodox action and yorkers."
+    "Jasprit Bumrah is an Indian fast bowler known for his unorthodox action and yorkers.",
+    "Spiderman was played by Tobey Maguire",
+    "Superman the man of steel was released on 2013"
 ]
 
 query = 'tell me about bumrah'
 
-embeddings = OpenAIEmbeddings(model = 'text-embedding-3-small', dimensions=100)
+embeddings = OpenAIEmbeddings(model = 'text-embedding-3-small', dimensions=512)
 
 doc_vectors = embeddings.embed_documents(documents)
 query_vector = embeddings.embed_query(query)
 
+threshold = 0.3
+
 similarity_matrix = cosine_similarity([query_vector], doc_vectors)
-
 doc_score = list(zip(documents, similarity_matrix[0]))
-max_element = max(doc_score, key=lambda x: x[1])
 
-print(max_element[0])
+filtered_doc_score = [doc_sc for doc_sc in doc_score if doc_sc[1] > threshold]
+print(filtered_doc_score)
+
+if filtered_doc_score:
+    max_element = max(filtered_doc_score, key=lambda x: x[1])
+    print(max_element[0])
+else:
+    print("None of the documents match to the query")
