@@ -20,3 +20,8 @@ doc_vectors = embeddings.embed_documents(documents)
 query_vector = embeddings.embed_query(query)
 
 similarity_matrix = cosine_similarity([query_vector], doc_vectors)
+
+doc_score = list(zip(documents, similarity_matrix[0]))
+max_element = max(doc_score, key=lambda x: x[1])
+
+print(max_element[0])
