@@ -1,8 +1,7 @@
 from langchain_core.prompts import PromptTemplate
-import os
+from get_template_path import get_path
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-template_path = os.path.join(current_dir, 'prompt.json')
+template_path = get_path('prompt.json')
 
 template = PromptTemplate.from_template("""
 Please summarize the research paper titled "{paper_input}" with the following specifications:

@@ -1,12 +1,6 @@
 import streamlit as st
 from get_model import model
-from langchain_core.prompts.loading import load_prompt
-import os
-
-current_dir = os.path.dirname(os.path.abspath(__file__))
-template_path = os.path.join(current_dir, 'prompt.json')
-
-template = load_prompt(template_path)
+from prompt_loading import template
 
 st.title("Research analysis")
 st.write("Get Summary of a research paper from our LLM")
