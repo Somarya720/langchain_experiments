@@ -6,7 +6,7 @@ st.write("Get Summary of a research paper from our LLM")
 paper_name = st.selectbox(
     "Enter the research paper",
     ("a","b","c"),
-    index=False,
+    index=None,
     placeholder='select paper'
 )
 
