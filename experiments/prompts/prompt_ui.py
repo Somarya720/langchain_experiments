@@ -1,10 +1,5 @@
 import streamlit as st
-from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
-
-model = ChatOpenAI(model='gpt-4.1-nano')
+from get_model import model
 
 st.title("Response Generator")
 st.write("Interact with our LLM: ")
