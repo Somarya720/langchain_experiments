@@ -30,5 +30,6 @@ if st.button("Summarize"):
             'style_input':summary_type
         }
     )
+    print(prompt)
     result = model.invoke(prompt)
     st.write(result.content)
